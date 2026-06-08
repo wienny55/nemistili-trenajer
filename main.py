@@ -5,6 +5,10 @@ on:
     branches: [ main, master ]
   workflow_dispatch:
 
+env:
+  # GitHub so'rayotgan yangi Node.js 24 muhitini majburiy yoqamiz
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -33,7 +37,6 @@ jobs:
 
       - name: Build APK
         run: |
-          # Flet CLI uchun eng standart va toza buyruq
           flet build apk
           
       - name: Upload APK Artifact
