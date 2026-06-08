@@ -5,10 +5,6 @@ on:
     branches: [ main, master ]
   workflow_dispatch:
 
-env:
-  # GitHub so'rayotgan yangi Node.js 24 muhitini majburiy yoqamiz
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -35,9 +31,15 @@ jobs:
         run: |
           pip install flet-cli
 
+      - name: Check files (Papka ichini tekshirish)
+        run: |
+          # Serverda qanday fayllar borligini ko'rish uchun
+          ls -la
+
       - name: Build APK
         run: |
-          flet build apk
+          # Fayl qayerdaligini aniq nuqta orqali ko'rsatamiz
+          flet build apk .
           
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
